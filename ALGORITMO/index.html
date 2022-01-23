@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="contain">
+        <h1>Algoritmo congruencial lineal</h1>
+    </div>
+    <section class="container">
+        <form name="formu">
+            <label for="fname">Valor de X0:</label>
+            <input type="number" id="X0" name="in1" required><br><br>
+
+            <label for="in2">Valor de g:</label>
+            <input type="number" id="g" name="in2" required><br><br>
+
+            <label for="in3">Valor de k:</label>
+            <input type="number" id="k" name="in3" required><br><br>
+
+            <label for="in4">Valor de c:</label>
+            <input type="number" id="c" name="in4" required><br><br>
+
+            <label for="in5">Núm. de dígitos:</label>
+            <input type="number" id="numdig" name="in5" required><br><br>
+
+            <label for="in6">Cantidad de núms:</label>
+            <input type="number" id="cant" name="in6" required><br><br>
+            
+        </form>
+
+        <button onclick="validacion()">Calcular</button>
+
+    </section>
+
+    <div class="disp" id="lmao">
+        
+        
+    </div>
+
+    <div class="disp1" id="lmai">
+        
+        
+    </div>
+
+
+
+    
+<style>
+    .disp{
+        display: flex;
+        flex-direction: column;
+    }
+    ul {
+    list-style-type: none;
+    }
+    html{
+        color: red;
+        font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    }
+
+</style>
+
+<script>
+    function validacion()
+    {
+        let a = document.forms["formu"]["in1"].value;
+        let b = document.forms["formu"]["in2"].value;
+        let c = document.forms["formu"]["in3"].value;
+        let d = document.forms["formu"]["in4"].value;
+        let e = document.forms["formu"]["in5"].value;
+        let f = document.forms["formu"]["in6"].value;
+
+        if (a == "" || b == "" || c == "" || d == "" || e == "" || f == "") {
+            alert("Llene los campos");
+          }
+          else
+          {
+              calcular();
+          }
+    }
+
+    function calcular()
+    {
+
+        let par1 = document.getElementById("X0").value;
+        let par2 = document.getElementById("g").value;
+        let par3 = document.getElementById("k").value;
+        let par4 = document.getElementById("c").value;
+        let par5 = document.getElementById("numdig").value;
+        let par6 = document.getElementById("cant").value;
+
+    
+        let Xo = parseInt(par1);
+        let g = parseInt(par2);
+        let k = parseInt(par3);
+        let c = parseInt(par4);
+        let digit = parseInt(par5);
+
+        let m = Math.pow(2,g);
+
+        let a = 1 + 4 * k;
+
+        let cantnum = parseInt(par6);
+
+
+        // Function to generate random numbers
+        function generar(Xo, m,  a, c, Xi,ri, cantnum)
+        {
+            Xi[0] = Xo;
+            
+            for(let i = 1; i <= cantnum; i++)
+            {
+                Xi[i] = ((Xi[i - 1] * a) + c) % m;
+                
+            }
+
+            ri[0] = (Xi[0])/(m-1);
+
+            for(let i = 1; i <= cantnum; i++)
+            {
+                ri[i] = (Xi[i])/(m-1);
+            }
+        }
+
+        // To store random numbers
+        let Xi = new Array(cantnum).fill(0);
+        let ri = new Array(cantnum).fill(0);
+
+        // Function Call
+        generar(Xo, m, a, c, Xi, ri, cantnum);
+
+        Number.prototype.toFixedNoRounding = function(n) {
+            const reg = new RegExp("^-?\\d+(?:\\.\\d{0," + n + "})?", "g")
+            const a = this.toString().match(reg)[0];
+            const dot = a.indexOf(".");
+            if (dot === -1) { 
+                return a + "." + "0".repeat(n);
+            }
+            const b = n - (a.length - dot) + 1;
+            return b > 0 ? (a + "0".repeat(b)) : a;
+         }
+
+
+
+        // Print the generated random numbers
+        let text1 = "<ul>"
+        let element = document.getElementById("lmao");
+        for(let i = 1; i <= cantnum; i++)
+        {
+            
+            element.innerHTML += (Xi[i] + ' ')
+            text1 += "<li>" + Xi[i] + "</li>";
+
+        }
+
+        text1 += "</ul>";
+        document.getElementById("lmao").innerHTML = text1;
+
+        let text2 = "<ul>"
+        let element2 = document.getElementById("lmai");
+        for(let i = 1; i <= cantnum; i++)
+            {
+                
+                // element2.innerHTML += (ri[i].toFixed(cantnum) + ' ');
+
+                // text2 += "<li>" + ri[i].toFixed(digit) + "</li>";
+
+                element2.innerHTML += (ri[i].toFixedNoRounding(digit) + ' ');
+
+                text2 += "<li>" + ri[i].toFixedNoRounding(digit) + "</li>";
+
+                
+            
+            }
+            text2 += "</ul>";
+            document.getElementById("lmai").innerHTML = text2;
+
+        }
+    
+    </script>
+</body>
+</html>
