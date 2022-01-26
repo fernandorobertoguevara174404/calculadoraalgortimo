@@ -1,0 +1,25 @@
+ul 
+{
+    list-style-type: none;
+}
+section{
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif !important;
+}
+
+.disp{
+    color: black;
+}
+.titulo{
+    font-size: 40px;
+}
+.btn{
+     background-color: lightblue;
+}
+.calc{
+    margin-top: 100px;
+    
+}
+
+.tit , .tit2{
+    border: 5px solid black;
+}
