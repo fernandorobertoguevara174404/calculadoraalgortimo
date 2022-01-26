@@ -96,7 +96,7 @@
         let cantnum = parseInt(par6);
 
 
-        // Function to generate random numbers
+        
         function generar(Xo, m,  a, c, Xi,ri, cantnum)
         {
             Xi[0] = Xo;
@@ -115,11 +115,9 @@
             }
         }
 
-        // To store random numbers
         let Xi = new Array(cantnum).fill(0);
         let ri = new Array(cantnum).fill(0);
 
-        // Function Call
         generar(Xo, m, a, c, Xi, ri, cantnum);
 
         Number.prototype.toFixedNoRounding = function(n) {
@@ -135,7 +133,6 @@
 
 
 
-        // Print the generated random numbers
         let text1 = "<ul>"
         let element = document.getElementById("lmao");
         for(let i = 1; i <= cantnum; i++)
